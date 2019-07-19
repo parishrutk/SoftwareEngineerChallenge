@@ -1,3 +1,12 @@
 
 *.iml
 *.class
+.idea/.name
+.idea/codeStyles/codeStyleConfig.xml
+.idea/compiler.xml
+.idea/deployment.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/inspectionProfiles/Switch_Project_Default.xml
+.idea/misc.xml
+.idea/vcs.xml
+.idea/workspace.xml
