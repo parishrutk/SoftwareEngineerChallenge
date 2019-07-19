@@ -1,17 +1,20 @@
 package com.paypaycorp.queue;
 
 import com.paypaycorp.queue.comparator.QueueComparator;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 public final class ImmutableQueue<T> implements Queue {
 
-    private static final Logger LOGGER = Logger.getLogger(ImmutableQueue.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImmutableQueue.class);
+
     private static final long serialVersionUID = -6849794470754667710L;
 
-    private static int front = 0; //Starting position would be 0 always for front.
-    private static int rear = 0; //Starting position would be 0 always rear.
+    private static int front; //Starting position would be 0 always for front.
+    private static int rear; //Starting position would be 0 always rear.
 
     public static final Comparator CASE_INSENSITIVE_ORDER = new QueueComparator();
 
@@ -19,6 +22,9 @@ public final class ImmutableQueue<T> implements Queue {
 
     public ImmutableQueue(Object[] elements) {
         this.elements = elements;
+    }
+
+    public ImmutableQueue() {
     }
 
     @Override
@@ -33,8 +39,7 @@ public final class ImmutableQueue<T> implements Queue {
     public Queue deQueue() {
         if (rear != front) {
             Object o = this.elements[front];
-            LOGGER.info("DeQueued : " + o);
-            System.out.println("DeQueued : " + o);
+            LOGGER.info("DeQueued : {} ", o);
             this.elements[front] = null;
 
             front++;
@@ -68,5 +73,18 @@ public final class ImmutableQueue<T> implements Queue {
 
     public static int getRear() {
         return rear;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final ImmutableQueue<?> that = (ImmutableQueue<?>) o;
+        return Arrays.equals(elements, that.elements);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(elements);
     }
 }
