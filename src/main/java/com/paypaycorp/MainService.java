@@ -21,7 +21,7 @@ public class MainService {
         System.out.println("Please Enter initial Size of the Queue: ");
         int size = scannerInput.nextInt();
         if (size < 1) {
-            throw new InvalidInputException("Invalid Initia size entered. Please provide valid Size.");
+            throw new InvalidInputException("Invalid Initial size entered. Please provide valid Size.");
         }
         Queue<String> queue = new ImmutableQueue<String>(size);
         System.out.println("\n");
